@@ -1,0 +1,6 @@
+{
+  "name": "LUMEA - Landing de Ventas GLP-1",
+  "description": "Landing page de alta conversión para la app LUMEA Sistema 5P, enfocada en prevención y mitigación de efectos secundarios durante tratamientos GLP-1 o péptidos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
