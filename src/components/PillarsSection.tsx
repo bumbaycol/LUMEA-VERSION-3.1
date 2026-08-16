@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { PILLARS_DATA } from '../data';
 import { ClipboardCheck, Apple, BookOpenCheck, ShieldAlert, Dumbbell, ChevronRight, CheckCircle2, ArrowRight } from 'lucide-react';
-import pilar1Img from '../assets/pillars/pilar_1.jpg';
-import pilar2Img from '../assets/pillars/pilar_2.jpg';
-import pilar3Img from '../assets/pillars/pilar_3.jpg';
-import pilar4Img from '../assets/pillars/pilar_4.jpg';
-import pilar5Img from '../assets/pillars/pilar_5.jpg';
+import { 
+  PILAR_1_IMG, 
+  PILAR_2_IMG, 
+  PILAR_3_IMG, 
+  PILAR_4_IMG, 
+  PILAR_5_IMG 
+} from '../assets/pillarsBase64';
 
 const PILLAR_IMAGES: Record<number, string> = {
-  1: pilar1Img,
-  2: pilar2Img,
-  3: pilar3Img,
-  4: pilar4Img,
-  5: pilar5Img,
+  1: PILAR_1_IMG,
+  2: PILAR_2_IMG,
+  3: PILAR_3_IMG,
+  4: PILAR_4_IMG,
+  5: PILAR_5_IMG,
 };
 
 interface PillarsSectionProps {
@@ -42,7 +44,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
   };
 
   const activePillar = PILLARS_DATA.find(p => p.id === activePillarId) || PILLARS_DATA[0];
-  const activeImage = PILLAR_IMAGES[activePillar.id] || pilar1Img;
+  const activeImage = PILLAR_IMAGES[activePillar.id] || PILAR_1_IMG;
 
   return (
     <section className="py-14 sm:py-20 px-4 sm:px-6 bg-slate-50 text-slate-900 border-b border-slate-200">
@@ -111,12 +113,14 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
 
           {/* Pillar Graphic Display */}
           <div className="w-full flex justify-center items-center mb-6">
-            <div className="w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-slate-200/80 bg-slate-950">
+            <div className="w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-900 flex items-center justify-center">
               <img 
                 key={activePillar.id}
                 src={activeImage} 
                 alt={`${activePillar.title} - Sistema LUMEA 5P`}
-                className="w-full h-auto object-cover block animate-fadeIn transition-opacity duration-300"
+                className="w-full h-auto object-contain block"
+                loading="eager"
+                decoding="sync"
               />
             </div>
           </div>
