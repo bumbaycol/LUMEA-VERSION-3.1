@@ -6,6 +6,7 @@ export interface PillarItem {
   iconName: string;
   tag: string;
   bgGradient: string;
+  imageUrl?: string;
 }
 
 export interface BonusItem {

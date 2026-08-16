@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { PILLARS_DATA } from '../data';
 import { ClipboardCheck, Apple, BookOpenCheck, ShieldAlert, Dumbbell, ChevronRight, CheckCircle2, ArrowRight } from 'lucide-react';
+import pilar1Img from '../assets/pillars/pilar_1.jpg';
+import pilar2Img from '../assets/pillars/pilar_2.jpg';
+import pilar3Img from '../assets/pillars/pilar_3.jpg';
+import pilar4Img from '../assets/pillars/pilar_4.jpg';
+import pilar5Img from '../assets/pillars/pilar_5.jpg';
+
+const PILLAR_IMAGES: Record<number, string> = {
+  1: pilar1Img,
+  2: pilar2Img,
+  3: pilar3Img,
+  4: pilar4Img,
+  5: pilar5Img,
+};
 
 interface PillarsSectionProps {
   onOpenCheckout?: () => void;
@@ -29,6 +42,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
   };
 
   const activePillar = PILLARS_DATA.find(p => p.id === activePillarId) || PILLARS_DATA[0];
+  const activeImage = PILLAR_IMAGES[activePillar.id] || pilar1Img;
 
   return (
     <section className="py-14 sm:py-20 px-4 sm:px-6 bg-slate-50 text-slate-900 border-b border-slate-200">
@@ -55,7 +69,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
                 className={`p-3.5 rounded-2xl text-left border transition-all duration-200 flex flex-col justify-between cursor-pointer ${
                   isActive
                     ? 'bg-emerald-600 text-white border-emerald-700 font-extrabold shadow-lg shadow-emerald-600/20 scale-[1.02]'
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/80'
+                    : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/80 shadow-sm'
                 }`}
               >
                 <div className="flex items-center justify-between w-full mb-2">
@@ -64,8 +78,8 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
                   }`}>
                     {getIcon(pillar.iconName)}
                   </span>
-                  <span className={`text-[10px] uppercase font-black px-2 py-0.5 rounded-full ${
-                    isActive ? 'bg-white text-emerald-800' : 'bg-slate-100 text-slate-500'
+                  <span className={`text-[10px] uppercase font-black px-2.5 py-0.5 rounded-full ${
+                    isActive ? 'bg-white text-emerald-800' : 'bg-slate-100 text-slate-600 font-bold'
                   }`}>
                     Pilar 0{pillar.id}
                   </span>
@@ -80,9 +94,9 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
           })}
         </div>
 
-        {/* Selected Pillar Content Display Box */}
-        <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-xl transition-all duration-300 mb-8">
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+        {/* Selected Pillar Content Display Box with Image */}
+        <div className="p-4 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-xl transition-all duration-300 mb-8">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4 px-1 sm:px-0">
             <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full">
               {activePillar.tag}
             </span>
@@ -91,16 +105,24 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
             </span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6 px-1 sm:px-0">
             {activePillar.title}
           </h3>
 
-          <p className="text-base sm:text-lg text-slate-800 leading-relaxed mb-6 bg-slate-50 p-5 rounded-2xl border border-slate-200 font-medium">
-            {activePillar.fullDesc}
-          </p>
+          {/* Pillar Graphic Display */}
+          <div className="w-full flex justify-center items-center mb-6">
+            <div className="w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-slate-200/80 bg-slate-950">
+              <img 
+                key={activePillar.id}
+                src={activeImage} 
+                alt={`${activePillar.title} - Sistema LUMEA 5P`}
+                className="w-full h-auto object-cover block animate-fadeIn transition-opacity duration-300"
+              />
+            </div>
+          </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-slate-200 text-xs text-slate-500 font-semibold">
-            <span>Haz clic en los otros pilares arriba para explorar todo el sistema</span>
+          <div className="flex items-center justify-between pt-4 border-t border-slate-200 text-xs text-slate-500 font-semibold px-1 sm:px-0">
+            <span>Toca los otros pilares arriba para ver la información gráfica de cada uno</span>
             <ChevronRight className="w-4 h-4 text-emerald-600" />
           </div>
         </div>
@@ -109,7 +131,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenCheckout }
         <div className="text-center">
           <button
             onClick={handleClick}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm sm:text-base rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm sm:text-base rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
           >
             <span>QUIERO ACCEDER A LOS 5 PILARES — $8 USD</span>
             <ArrowRight className="w-4 h-4" />
